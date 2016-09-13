@@ -118,7 +118,49 @@ void printM(char **M){
 }
 
 
-void step(){
+void step(char **M, int a, int b, int c, int d,Jogador char){
+
+
+	if (Jogador == 'X' && (a <= c || b==d) )
+		//erro
+
+	if  M[c][d] != ' '
+		//erro
+
+	if (Jogador == 'O' && (a >= c || b==d)) 
+		//erro
+
+	if (b>d && Jogador == 'X')
+		if (M[a-1][b-1] != ' ' && != Jogador)
+			M[a-1][b-1] = ' '	
+
+	else if (b<d && Jogador == 'X')
+		if (M[a-1][b+1] != ' ' && != Jogador)
+			M[a-1][b+1] = ' '
+
+	
+	if (b<d && Jogador == 'O')
+		if (M[a+1][b+1] != ' ' && != Jogador)
+			M[a+1][b+1] = ' '	
+
+	else if (b>d && Jogador == 'O')
+		if (M[a+1][b-1] != ' ' && != Jogador)
+			M[a+1][b-1] = ' '			
+
+
+	
+
+	//controlar o movimento.
+
+
+
+
+
+	//controlar onde esta sendo alocada.
+
+
+	//controlar
+
 
 	//escolhe a peça que irá se mover e escolhe a casa para onde a peça vai andar.
 	
@@ -126,6 +168,8 @@ void step(){
 }
 
 void movePeca(char **M, int a, int b, int c, int d){
+
+	step(M,a,b,c,d,)
 
 
 	M[c][d] = M[a][b];
