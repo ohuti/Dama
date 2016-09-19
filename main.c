@@ -18,7 +18,10 @@ int step(char **M, int i, int j, int lin, int col, char jogador);
 Verifica se o jogo pode ou não continuar
 caso as peças acabem ou não possam mais se mover.
 */
-//int status(char **M);
+int status(char **M);
+
+//Complemento status.
+int statusJogador(char **M, char jogador);
 
 /*Função que aplica a lógica do jogo, que alterna a rodada de cada jogador e
 que imprime o tabuleiro atualizado a cada rodada.
@@ -182,10 +185,33 @@ int step(char **M, int i, int j, int lin, int col, char jogador){
 	return 1;
 }
 
-/*int status(char **M){
+int statusJogador(char **M, char jogador){
+	int i;
+	for(i=0; i<N; i++)
+		if( M[i][0] == jogador || M[i][1] == jogador || M[i][2] == jogador || M[i][3] == jogador || 
+			M[i][4] == jogador || M[i][5] == jogador || M[i][6] == jogador || M[i][7] == jogador)
+				return 1;
+	return 0;
+}
 
+int status(char **M){
 
-}*/
+	/* -1 = Jogo continua
+	    0 = Brancas ganham.
+	    1 = Pretas ganham.
+	*/
+
+	if(statusJogador(M, 'O'))
+		return -1;
+	else 
+		return 0;
+
+	if(statusJogador(M, 'P'))
+		return -1;
+	else
+		return 1;
+
+}
 
 void movePeca(char **M, int i, int j, int lin, int col, char jogador){
 
@@ -212,8 +238,6 @@ void movePeca(char **M, int i, int j, int lin, int col, char jogador){
 				M[lin-1][col+1] = ' ';
 		}
 	}
-
-
 }
 
 
@@ -226,6 +250,7 @@ void game(){
 	int i, j;
 	//escolhe a casa
 	int lin, col;
+	char msg[][20]={"ocorreu um empate","jogador O venceu","jogador X venceu"};
 
 	intitialize();
 	
@@ -246,7 +271,8 @@ void game(){
             continue;
         }
  		movePeca(tabuleiro,i-1, j-1, lin-1, col-1, jogador);
-					
+		jogoAtivo = status(tabuleiro);
+
 		//alternando jogadores.
 		if(jogador == 'O')
             jogador = 'X';
@@ -254,4 +280,5 @@ void game(){
             jogador = 'O';
 	
 	}
+	printf("\n%s\n", msg[jogoAtivo]);
 }
